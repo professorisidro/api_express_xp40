@@ -1,10 +1,14 @@
-const { application } = require("express");
 const express = require("express")
 const port = process.env.PORT || 3000;
 const cors = require("cors");
+const dbConn = require("./conexaobd");
+const Produto = require("./Produto");
+
+Produto.sync(() => { console.log("Sincronizando modelo com BD")});
 
 console.log("Porta que identifica o express = " + port);
 
+/**
 let listaProdutos = [
     {
         id: 1234,
@@ -19,6 +23,7 @@ let listaProdutos = [
         qtdEstoque: 20
     }
 ];
+*/
 
 // criei uma variável chamada API que vai inicializar o express
 const api = express();
@@ -28,14 +33,43 @@ api.use(cors());
 api.get("/produtos", (req, res) => {
     console.log("Acessei a function correspondente ao método GET");
 
+    Produto.findAll()
+           .then(lista => {
+                res.status(200);
+                res.json(lista);
+           })
+           .catch(erro => {
+                res.status(500);
+                res.send("Erro ao recuperar!!!");
+           });
 
+
+    /*
     res.status(200);
     res.json(listaProdutos);
+    */
 });
 
 api.get("/produtos/:id" , (req, res) => {
-    let idProduto = req.params["id"];
+    let idProduto = req.params["id"];   
     console.log("a URL tem o parametro "+idProduto);
+
+    Produto.findByPk(idProduto)
+           .then(prod => {
+               if (prod){
+                   res.status(200);
+                   res.json(prod);
+               }
+               else{
+                   res.status(404);
+                   res.send("Not found");
+               }
+           })
+           .catch(erro => {
+               res.status(500);
+               res.send("Deu ruim");
+           });
+    /*
     let produto;
     for (i=0; i< listaProdutos.length; i++){
         if (idProduto == listaProdutos[i].id){
@@ -52,6 +86,7 @@ api.get("/produtos/:id" , (req, res) => {
         res.status(404);
         res.send("Not found");
     }
+    */
     
 })
 

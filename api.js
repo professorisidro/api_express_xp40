@@ -22,8 +22,8 @@ let listaProdutos = [
         preco: 58.00,
         qtdEstoque: 20
     }
-];
-*/
+];*/
+
 
 // criei uma variável chamada API que vai inicializar o express
 const api = express();
@@ -107,3 +107,8 @@ api.delete("/produtos", (req, res) => {
 api.listen(port, () => {
     console.log("API no ar, atendendo na porta " + port);
 })
+
+
+
+
+

@@ -4,6 +4,20 @@ const dbConn = require('./conexaobd')
 // aqui não vem a criação de uma variável (estrutura/classe) do tipo produto,
 // e sim o mapeamento tanto do nome da tabela para a estrutura quanto do nome das colunas
 // da tabela para os atributos desta classe
+
+/*
+const Produto = {
+    codigo: {
+        
+    },
+    nome : "computador",
+    descricao:"computador que acende luzinha",
+    preco: 1500.00,
+    estoque: 3,
+    linkFoto: "computador.jpg"
+}
+*/
+
 const Produto = dbConn.define('produto',{
     codigo: {
         type: Sequelize.INTEGER,

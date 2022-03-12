@@ -6,12 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+ 
   "author": "Prof. Isidro",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "fetch": "^1.1.0",
     "mysql2": "^2.3.3",
+    "node-fetch": "^3.2.3",
     "sequelize": "^6.16.3"
   }
 }
